@@ -59,10 +59,21 @@ function showResultWindow(userNumber) {
         <button id="try-again-btn">Try Again</button>
     `;
 
-    document.getElementById("try-again-btn").addEventListener("click", () => {
+    const tryAgainBtn = document.getElementById("try-again-btn");
+
+    tryAgainBtn.addEventListener("click", () => {
         location.reload();
     });
+
+    // Add Enter key listener to trigger reload on Enter key press
+    document.addEventListener("keydown", function onEnter(e) {
+        if (e.key === "Enter") {
+            location.reload();
+            document.removeEventListener("keydown", onEnter); // Clean up listener after use
+        }
+    });
 }
+
 
 function handleSubmit() {
     const userInput = numberInput.value.trim();
