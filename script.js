@@ -90,8 +90,6 @@ function handleSubmit() {
         showThinkingWindow(userNumber);
     }
 }
-
-
 submitBtn.addEventListener("click", handleSubmit);
 numberInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
@@ -99,3 +97,20 @@ numberInput.addEventListener("keydown", (e) => {
     }
 });
 
+document.addEventListener("keydown", (e) => {
+  // If input is focused, do nothing here (letting your existing input handlers work)
+  if (document.activeElement === numberInput) return;
+
+  // Append digits 0-9 typed anywhere
+  if (/^\d$/.test(e.key)) {
+    numberInput.value += e.key;
+  }
+  // Handle Backspace key globally
+  else if (e.key === "Backspace") {
+    numberInput.value = numberInput.value.slice(0, -1);
+  }
+  // If Enter pressed anywhere, trigger submit
+  else if (e.key === "Enter") {
+    handleSubmit();
+  }
+});
