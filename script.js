@@ -65,14 +65,21 @@ function showResultWindow(userNumber) {
 }
 
 function handleSubmit() {
-    const userNumber = parseInt(numberInput.value);
-    if (!validateInput(userNumber)) {
+    const userInput = numberInput.value.trim();
+    const userNumber = parseFloat(userInput);
+
+    if (userInput === "" || isNaN(userNumber)) {
+        errorMsg.textContent = "Please enter a valid number.";
+    } else if (!Number.isInteger(userNumber)) {
+        errorMsg.textContent = "Please enter a whole number (no decimals).";
+    } else if (!validateInput(userNumber)) {
         errorMsg.textContent = "Please enter a number between 1 and 10.";
     } else {
         errorMsg.textContent = "";
         showThinkingWindow(userNumber);
     }
 }
+
 
 submitBtn.addEventListener("click", handleSubmit);
 numberInput.addEventListener("keydown", (e) => {
