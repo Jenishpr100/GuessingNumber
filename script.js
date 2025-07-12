@@ -87,3 +87,4 @@ numberInput.addEventListener("keydown", (e) => {
         handleSubmit();
     }
 });
+
